@@ -33,18 +33,25 @@
     (package-install p)))
 
 ;;------------------------------------------------------------
-;; Configure Wind Move
+;; Configure buffers
+
 ;; Enables moving cursor between buffers using SHIFT and Arrow keys
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
 
-;;------------------------------------------------------------
-;; Configure buffer-move
 ;; Enables moving buffers within frame
 (global-set-key (kbd "<C-S-up>") 'buf-move-up)
 (global-set-key (kbd "<C-S-down>") 'buf-move-down)
 (global-set-key (kbd "<C-S-left>") 'buf-move-left)
 (global-set-key (kbd "<C-S-right>") 'buf-move-right)
+
+;; Enable line/column numbers
+(setq line-number-mode t)
+(setq column-number-mode t)
+
+;;------------------------------------------------------------
+;; Configure paths
+(add-to-list 'exec-path "/usr/local/bin") ; for cider-jack-in
 
 ;;------------------------------------------------------------
 ;; Configure paredit
