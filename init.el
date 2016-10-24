@@ -1,3 +1,4 @@
+;; Package repositories
 (require 'package)
 (add-to-list 'package-archives
              '("marmalade" . "https://marmalade-repo.org/packages/") t)
@@ -5,15 +6,18 @@
              '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (package-initialize)
 
-
+;; Create repository index, only when needed
 (unless package-archive-contents (package-refresh-contents))
 
+;; User selected packages to install
 (defvar my-packages '(
                       ;; Sets up ido-mode, uniquify and some base defaults
                       better-defaults
                       ;; Structured editing of s-expressions
-                      paredit
+                      buffer-move
                       ;; Project file navigation
+                      paredit
+                      ;; Enable moving buffers around the emacs frame
 		      projectile
                       ;; Syntax highlighting for clojure
 		      clojure-mode
@@ -28,25 +32,19 @@
   (unless (package-installed-p p)
     (package-install p)))
 
-;; -------------------------------------------------------------------
-;; Set colors
+;;------------------------------------------------------------
+;; Configure Wind Move
+;; Enables moving cursor between buffers using SHIFT and Arrow keys
+(when (fboundp 'windmove-default-keybindings)
+  (windmove-default-keybindings))
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (sanityinc-solarized-dark)))
- '(custom-safe-themes
-   (quote
-    ("4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
- '(package-selected-packages nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;;------------------------------------------------------------
+;; Configure buffer-move
+;; Enables moving buffers within frame
+(global-set-key (kbd "<C-S-up>") 'buf-move-up)
+(global-set-key (kbd "<C-S-down>") 'buf-move-down)
+(global-set-key (kbd "<C-S-left>") 'buf-move-left)
+(global-set-key (kbd "<C-S-right>") 'buf-move-right)
 
 ;;------------------------------------------------------------
 ;; Configure paredit
@@ -65,3 +63,24 @@
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+
+;; -------------------------------------------------------------------
+;; Customizations
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (sanityinc-solarized-dark)))
+ '(custom-safe-themes
+   (quote
+    ("4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
+ '(package-selected-packages nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
