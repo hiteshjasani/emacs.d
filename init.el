@@ -25,7 +25,9 @@
 		      cider
                       ;; markdown highlighting
                       markdown-mode
+                      ;; M-x load-theme
                       color-theme-sanityinc-solarized
+                      solarized-theme
                       ))
 
 (dolist (p my-packages)
