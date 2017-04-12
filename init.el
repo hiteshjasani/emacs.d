@@ -116,3 +116,7 @@
 ;; Configure custom variables
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
+
+;;------------------------------------------------------------
+;; Custom functions
+(defun wc () (interactive) (shell-command (concat "wc " buffer-file-name)))
