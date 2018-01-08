@@ -103,6 +103,9 @@
 ;; Configure clojure
 ; vertically align clojure forms when selected and hit TAB
 (setq clojure-align-forms-automatically t)
+;; This is an attempt 2017-10-15, remove if not working!
+;; Prevent slowdown degradation when working with extremely long lines
+(setq bidi-display-reordering nil)
 
 ;;------------------------------------------------------------
 ;; Configure markdown
